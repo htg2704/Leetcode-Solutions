@@ -5,7 +5,6 @@ class Solution:
         heapq.heapify(heap)
         for i in nums[k:]:
             if i>heap[0]:
-                heapq.heappop(heap)
-                heapq.heappush(heap, i)
+                heapq.heappushpop(heap, i)
         return heap[0]
         
