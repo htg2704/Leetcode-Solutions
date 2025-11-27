@@ -1,37 +1,27 @@
 class Solution:
     def totalNQueens(self, n: int) -> int:
-        def isSafe(board, row, col):
-            r, c = row, col
-            while r>=0 and c>=0:
-                if(board[r][c]=='Q'):
-                    return False
-                r-=1
-                c-=1
-            r, c = row, col
-            while r>=0:
-                if(board[r][c]=='Q'):
-                    return False
-                r-=1
-            r, c = row, col
-            while r>=0 and c<n:
-                if(board[r][c]=='Q'):
-                    return False
-                r-=1
-                c+=1
-            return True
+        cols = set()        # occupied columns
+        diag1 = set()       # r - c
+        diag2 = set()       # r + c
 
-        def fun(row, ans, board):
-            if(row==len(board)):
-                ans.append(["".join(r) for r in board])
-                return
+        def backtrack(row: int) -> int:
+            if row == n:
+                return 1
+            count = 0
             for col in range(n):
-                if isSafe(board, row, col):
-                    board[row][col]='Q'
-                    fun(row+1, ans, board)
-                    board[row][col]='.'
+                if col in cols or (row - col) in diag1 or (row + col) in diag2:
+                    continue
+                # place
+                cols.add(col)
+                diag1.add(row - col)
+                diag2.add(row + col)
 
-        ans = []
-        board = [['.' for _ in range(n)] for _ in range(n)]
-        fun(0, ans, board)
-        return len(ans)
-        
+                count += backtrack(row + 1)
+
+                # remove (backtrack)
+                cols.remove(col)
+                diag1.remove(row - col)
+                diag2.remove(row + col)
+            return count
+
+        return backtrack(0)
