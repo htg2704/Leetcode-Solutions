@@ -4,8 +4,8 @@ class Solution:
         ans = [0]*n
         a = []
         for i in range(n):
-            while a and temp[i]>a[-1][0]:
-                T, I = a.pop()
-                ans[I] = i - I
-            a.append((temp[i], i))
+            while a and temp[i]>temp[a[-1]]:
+                id = a.pop()
+                ans[id] = i - id
+            a.append(i)
         return ans
