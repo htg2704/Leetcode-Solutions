@@ -5,7 +5,6 @@ class Solution:
             if c in d:
                 d[c]+=1
         m1,m2 = min(d['b'], d['a'], d['n']), min(d['l'],d['o'])//2
-        print(m1,m2)
         return min(m1,m2)
 
         
