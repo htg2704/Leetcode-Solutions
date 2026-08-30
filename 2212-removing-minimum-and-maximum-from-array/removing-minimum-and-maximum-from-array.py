@@ -9,16 +9,8 @@ class Solution:
                 mine=nums[i]
                 mini = i
         n = len(nums)
-        mid = n//2
-        if(mini<=mid and maxi<=mid):
-            return max(mini, maxi)+1
-        elif(mini>=mid and maxi>=mid):
-            return n-min(mini, maxi)
-        else:
-            l = min(mini, maxi)
-            r = max(mini, maxi)
-            return min(l+1+(n-r), n-l, r+1)
-        
-        
-        
-        
+        l = min(mini, maxi)
+        r = max(mini, maxi)
+        n = len(nums)
+        return min(r + 1, n - l,l + 1 + n - r  )
+    
